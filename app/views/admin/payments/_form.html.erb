@@ -1,0 +1,13 @@
+<%= form_for [:admin, @payment],  html: { class: "form-horizontal" }  do |f| %>
+  <% @payment.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>

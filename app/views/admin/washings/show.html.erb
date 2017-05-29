@@ -1,0 +1,12 @@
+<% title "Admin/Washing" %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @washing.name %>
+  </p>
+
+<p>
+    <%= link_to "Edit", edit_admin_washing_path(@washing), class: "btn btn-warning" %> |
+    <%= link_to "Destroy", [:admin, @washing], data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger" %> |
+    <%= link_to "View All", admin_washings_path, class: "btn btn-primary" %>
+</p>

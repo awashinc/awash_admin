@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  car_id: 1
+  user_id: 1
+  washer_id: 1
+  wash_date: 2016-09-06 11:20:01
+  washer_comment: MyText
+  service_part: MyString
+  service_time: MyString
+  start_time: 2016-09-06 11:20:01
+  end_time: 2016-09-06 11:20:01
+  feedback: MyText
+
+two:
+  car_id: 1
+  user_id: 1
+  washer_id: 1
+  wash_date: 2016-09-06 11:20:01
+  washer_comment: MyText
+  service_part: MyString
+  service_time: MyString
+  start_time: 2016-09-06 11:20:01
+  end_time: 2016-09-06 11:20:01
+  feedback: MyText

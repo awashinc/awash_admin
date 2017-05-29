@@ -1,0 +1,60 @@
+/*
+*= require jquery-ui/autocomplete
+*/
+
+@import "toastr";
+
+$nprogress-color: #29d ;
+$nprogress-height: 10px;
+$nprogress-zindex: 10100;
+
+@import "bootstrap";
+@import "font-awesome";
+
+@import 'nprogress';
+@import 'nprogress-bootstrap';
+@import 'nprogress-turbolinks5';
+
+@import 'simple_calendar';
+
+@import "mdDateTimePicker";
+
+
+@import "css/animate.min";
+@import "css/icheck/flat/green";
+@import "css/floatexamples";
+@import "css/normalize";
+@import "css/ion.rangeSlider";
+@import "css/ion.rangeSlider.skinFlat";
+@import "css/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min";
+@import "css/jqvmap/jqvmap.min";
+
+@import "css/custom";
+.none{
+    display:none !important;
+  }
+
+a, a:focus, a:hover{
+  text-decoration: none;
+}
+
+.container{
+/*  padding-top: 30px; */
+}
+
+
+.form-inline .inine.form-control[type="checkbox"] {
+  width: 5%;
+}
+.form-inline .inline.form-control[type="text"] {
+  width: 95%;
+}
+
+.nav-item.sign-out{
+  float:right;
+  margin-right: 30px;
+
+}
+.navbar.navbar-light{
+  background: #ccc;
+}

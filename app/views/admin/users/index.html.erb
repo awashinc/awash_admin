@@ -1,0 +1,87 @@
+<div class="search_form">
+  <%= form_tag admin_users_path, remote: true, class: "form-inline",  :method => :get  do %>
+    <div class="form-group">
+    <%= label_tag  :name, "유저명"  %>
+    <%= text_field_tag :name, params[:name], :class => 'form-control'  %>
+    </div>
+
+    <%= submit_tag "Search", class: "btn btn-warning" %>
+  <% end %>
+</div>
+
+
+<table class="table table-hover table-responsive">
+  <tr>
+    <th>Name</th>
+    <th>phone</th>
+    <th class="hidden-md-down">email</th>
+    <!--
+    <th>wash_offer</th>
+    <th>offer_memo</th>
+    -->
+    <th>Cars</th>
+    <th class="hidden-md-down">WEATHER</th>
+    <th class="hidden-md-down">status</th>
+    <th class="hidden-md-down">level</th>
+    <% if current_user.user_level > 70 %>
+      <th></th>
+    <% end %>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td data-toggle="modal" data-target="#car-list-modal" data-user-id="<%= user.id %>" class=""><%= user.username %>( <%= user.cars.count %>)</td>
+      <td><%= user.phone%></td>
+      <td class="hidden-md-down"><%= user.email%> <%= "(#{user.email1})" if user.email1.present? %></td>
+      <!--
+      <td><%= user.wash_offer_str %></td>
+      <td><%= user.wash_offer_memo %></td>
+      -->
+      <td>
+        <% user.cars.each do |car| %> 
+          <p>
+            <span id="spot<%= car.id %>" value="<%= car.spot %>">  <%= car.spot %> </span>
+            <span class='tag tag-primary copy-target' data-clipboard-target="#spot<%= car.id %>">Copy</span>
+            <% if car.latitude.present? && car.longitude.present? %>
+              <a class='tag tag-primary hidden-md-down' target='_blank' href="http://map.daum.net/link/to/<%= user.username %>,<%= car.latitude %>,<%= car.longitude %>">찾기</a>
+              <a class='tag tag-primary' target='_blank' href='daummaps://route?sp=&ep=<%= car.latitude %>,<%= car.longitude %>&by=CAR'>Mobile 찾기</a>
+            <% end %>
+          </p>
+        <% end %>
+      </td>
+      <td class="hidden-md-down">RAINY/SUNNY/CLOUDY/FOG</td>
+      <% if current_user.user_level > 70 %>
+        <td class="hidden-md-down"><%= user.user_status_str %></td>
+        <td class="hidden-md-down"><%= user.user_level_str %></td>
+        <td><%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-warning btn-sm" %>
+        <%= link_to "Destroy", [:admin, user], data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger btn-sm" %></td>
+      <% end %>
+    </tr>
+
+  <% end %>
+</table>
+
+<%= paginate @users %>
+<p><%= link_to "New Admin/User", new_admin_user_path, class: "btn btn-primary" %></p>
+<p>
+<%= link_to "Export User", export_users_admin_users_path(format: "xlsx"),  class: "btn btn-primary" %>
+</p>
+
+
+<div class="modal fade" id="car-list-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

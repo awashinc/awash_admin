@@ -1,0 +1,17 @@
+<table class="table table-hover">
+  <tr>
+      <th>Name</th>
+  </tr>
+  <% for payment in @payments %>
+    <tr>
+        <td><%= payment.name %></td>
+      
+      <td>
+          <%= link_to "Edit", edit_admin_payment_path(payment), class: "btn btn-warning" %>
+          <%= link_to "Destroy", [:admin, payment], data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+  <p><%= link_to "New Admin/Payment", new_admin_payment_path, class: "btn btn-primary" %></p>

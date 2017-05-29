@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  washing_id: 1
+  user_id: 1
+  commnet: MyText
+  image: MyString
+
+two:
+  washing_id: 1
+  user_id: 1
+  commnet: MyText
+  image: MyString

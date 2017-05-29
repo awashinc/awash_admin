@@ -1,0 +1,12 @@
+<% title "Admin/Car Manufacturer" %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @car_manufacturer.name %>
+  </p>
+
+<p>
+    <%= link_to "Edit", edit_admin_car_manufacturer_path(@car_manufacturer), class: "btn btn-warning" %> |
+    <%= link_to "Destroy", [:admin, @car_manufacturer], data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger" %> |
+    <%= link_to "View All", admin_car_manufacturers_path, class: "btn btn-primary" %>
+</p>

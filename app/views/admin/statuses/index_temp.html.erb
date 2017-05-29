@@ -1,0 +1,1127 @@
+<!--
+<%= stylesheet_link_tag 'admin/css.css', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'admin/netstats','data-turbolinks-track': 'reload' %>
+<div ng-controller="StatsCtrl" class="container-fluid ng-scope">
+    <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-12 stat-holder">
+            <div class="big-info bestblock text-info">
+                <div class="pull-left icon-full-width">
+                    <i class="icon-block"></i>
+                </div>
+                <div class="big-details-holder">
+                    <span class="small-title">best block</span>
+                    <span class="big-details ng-binding">#2,201,618</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-12 stat-holder">
+            <div class="big-info uncleCount text-info">
+                <div class="pull-left icon-full-width">
+                    <i class="icon-uncle"></i>
+                </div>
+                <div class="big-details-holder">
+                    <span class="small-title">uncles&nbsp;
+                        <span class="small">(current / last 50)</span>
+                    </span>
+                    <span class="big-details ng-binding">0/2</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-12 stat-holder">
+            <div class="big-info blocktime text-success">
+                <div class="pull-left icon-full-width"><i class="icon-time"></i>
+                </div>
+                <div class="big-details-holder"><span class="small-title">last block</span><span class="big-details ng-binding">8 s ago</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-12 stat-holder">
+            <div class="big-info avgblocktime text-warning">
+                <div class="pull-left icon-full-width"><i class="icon-gas"></i>
+                </div>
+                <div class="big-details-holder"><span class="small-title">avg block time</span><span class="big-details ng-binding">14.07 s</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-12 stat-holder">
+            <div class="big-info difficulty text-orange">
+                <div class="pull-left icon-full-width"><i class="icon-hashrate"></i>
+                </div>
+                <div class="big-details-holder"><span class="small-title">avg network hashrate</span><span ng-bind-html="avgHashrate | networkHashrateFilter" class="big-details ng-binding">5 <span class="small-hash">TH/s</span></span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-12 stat-holder">
+            <div class="big-info difficulty text-danger">
+                <div class="pull-left icon-full-width"><i class="icon-difficulty"></i>
+                </div>
+                <div class="big-details-holder"><span class="small-title">difficulty</span><span class="big-details"><span class="small-hash ng-binding">67.46 TH</span></span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div style="padding-top: 0px;" class="col-xs-12 stats-boxes">
+            <div class="row second-row">
+                <div class="col-md-3 col-sm-4 col-xs-12 stat-holder box">
+                    <div class="active-nodes text-success"><i class="icon-node"></i><span class="small-title">active nodes</span><span class="small-value ng-binding">28/29</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 stat-holder box">
+                    <div class="gasprice text-info"><i class="icon-gasprice"></i><span class="small-title">gas price</span><span class="small-value ng-binding">20 gwei</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 stat-holder box">
+                    <div class="gasprice text-info"><i class="icon-gasprice"></i><span class="small-title">gas limit</span><span class="small-value ng-binding">4707783 gas</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 stat-holder box">
+                    <div class="page-latency text-warning"><i class="icon-clock"></i><span class="small-title">page latency</span><span class="small-value ng-binding">183 ms</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 stat-holder box">
+                    <div class="uptime text-success"><i class="icon-bulb"></i><span class="small-title">uptime</span><span class="small-value ng-binding">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12 stat-holder">
+                            <div class="big-info chart text-warning"><span class="small-title">block time</span><span data="17.957,17.528,10.766,11.473,14.031,15.692,23.396,32.212,12.875,25.755,10.973,6.383,44.522,15.262,26.789,5.009,3.855,22.686,19.488,4.01,29.037,7.54,9.636,27.915,3.673,22.968,17.109,4.051,8.486,15.815,8.009,19.252,19.324,13.123,28.945,1.907,6.125,3.453,8.007,9.013" class="ng-binding ng-isolate-scope big-details"><canvas height="63" width="279" style="display: inline-block; width: 279px; height: 63px; vertical-align: top;"></canvas></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 stat-holder xpull-right">
+                            <div class="big-info chart xdouble-chart text-warning"><span class="small-title">block propagation</span>
+                                <histogram data="blockPropagationChart" class="big-details d3-blockpropagation ng-isolate-scope">
+                                    <svg height="63" width="280">
+                                        <g transform="translate(0,0)">
+                                            <g transform="translate(0,63)" class="x axis">
+                                                <g transform="translate(0,0)" style="opacity: 1;" class="tick">
+                                                    <line x2="0" y2="6"></line>
+                                                    <text x="0" y="6" style="text-anchor: middle;" dy=".71em">0s</text>
+                                                </g>
+                                                <g transform="translate(56,0)" style="opacity: 1;" class="tick">
+                                                    <line x2="0" y2="6"></line>
+                                                    <text x="0" y="6" style="text-anchor: middle;" dy=".71em">2s</text>
+                                                </g>
+                                                <g transform="translate(112,0)" style="opacity: 1;" class="tick">
+                                                    <line x2="0" y2="6"></line>
+                                                    <text x="0" y="6" style="text-anchor: middle;" dy=".71em">4s</text>
+                                                </g>
+                                                <g transform="translate(168,0)" style="opacity: 1;" class="tick">
+                                                    <line x2="0" y2="6"></line>
+                                                    <text x="0" y="6" style="text-anchor: middle;" dy=".71em">6s</text>
+                                                </g>
+                                                <g transform="translate(224,0)" style="opacity: 1;" class="tick">
+                                                    <line x2="0" y2="6"></line>
+                                                    <text x="0" y="6" style="text-anchor: middle;" dy=".71em">8s</text>
+                                                </g>
+                                                <g transform="translate(280,0)" style="opacity: 1;" class="tick">
+                                                    <line x2="0" y2="6"></line>
+                                                    <text x="0" y="6" style="text-anchor: middle;" dy=".71em">10s</text>
+                                                </g>
+                                                <path d="M0,6V0H280V6" class="domain"></path>
+                                            </g>
+                                            <g transform="translate(280, 0)" class="y axis">
+                                                <g transform="translate(0,63)" style="opacity: 1;" class="tick">
+                                                    <line y2="0" x2="-6"></line>
+                                                    <text y="0" x="-9" style="text-anchor: end;" dy=".32em">0%</text>
+                                                </g>
+                                                <g transform="translate(0,45)" style="opacity: 1;" class="tick">
+                                                    <line y2="0" x2="-6"></line>
+                                                    <text y="0" x="-9" style="text-anchor: end;" dy=".32em">10%</text>
+                                                </g>
+                                                <g transform="translate(0,27)" style="opacity: 1;" class="tick">
+                                                    <line y2="0" x2="-6"></line>
+                                                    <text y="0" x="-9" style="text-anchor: end;" dy=".32em">20%</text>
+                                                </g>
+                                                <g transform="translate(0,9)" style="opacity: 1;" class="tick">
+                                                    <line y2="0" x2="-6"></line>
+                                                    <text y="0" x="-9" style="text-anchor: end;" dy=".32em">30%</text>
+                                                </g>
+                                                <path d="M-6,0H0V63H-6" class="domain"></path>
+                                            </g>
+                                            <g class="bars">
+                                                <g transform="translate(0,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="52" width="6" fill="#39ca26" ry="1" rx="1" y="12" class="bar"></rect>
+                                                    <rect height="52" width="6" ry="1" rx="1" fill="#49ff30" y="12" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(7,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="64" width="6" fill="#4aca2b" ry="1" rx="1" y="0" class="bar"></rect>
+                                                    <rect height="64" width="6" ry="1" rx="1" fill="#5eff37" y="0" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(14,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="25" width="6" fill="#5acb30" ry="1" rx="1" y="39" class="bar"></rect>
+                                                    <rect height="25" width="6" ry="1" rx="1" fill="#73ff3d" y="39" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(21,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="6" width="6" fill="#6bcb35" ry="1" rx="1" y="58" class="bar"></rect>
+                                                    <rect height="6" width="6" ry="1" rx="1" fill="#89ff44" y="58" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(28,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="3" width="6" fill="#7bcc3a" ry="1" rx="1" y="61" class="bar"></rect>
+                                                    <rect height="3" width="6" ry="1" rx="1" fill="#9dff4a" y="61" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(35,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="3" width="6" fill="#8ccd3f" ry="1" rx="1" y="61" class="bar"></rect>
+                                                    <rect height="3" width="6" ry="1" rx="1" fill="#b3ff50" y="61" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(42,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="2" width="6" fill="#9ccd44" ry="1" rx="1" y="62" class="bar"></rect>
+                                                    <rect height="2" width="6" ry="1" rx="1" fill="#c8ff57" y="62" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(49,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="2" width="6" fill="#adce49" ry="1" rx="1" y="62" class="bar"></rect>
+                                                    <rect height="2" width="6" ry="1" rx="1" fill="#deff5d" y="62" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(56,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="2" width="6" fill="#bdcf4e" ry="1" rx="1" y="62" class="bar"></rect>
+                                                    <rect height="2" width="6" ry="1" rx="1" fill="#f2ff64" y="62" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(63,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#cecf53" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffff6a" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(70,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ded058" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffff70" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(77,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#efd05d" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffff77" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(84,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffd162" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffff7d" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(91,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffcd5c" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffff76" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(98,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffc856" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffff6e" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(105,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffc450" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#fffb66" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(112,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffbf4a" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#fff55e" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(119,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffbb43" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#fff056" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(126,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffb63d" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffe94e" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(133,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffb237" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffe446" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(140,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffae31" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffdf3e" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(147,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffa92b" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffd837" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(154,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffa525" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffd32f" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(161,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ffa01f" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffcd27" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(168,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ff9c19" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffc826" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(175,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ff9712" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffc126" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(182,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ff930c" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffbc26" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(189,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ff8e06" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffb626" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(196,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#ff8a00" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffb100" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(203,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fe8506" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffaa26" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(210,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fe800d" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ffa426" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(217,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fd7a13" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff9c26" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(224,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fc7519" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff9626" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(231,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fc701f" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff8f27" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(238,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fb6b26" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff8930" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(245,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fa652c" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff8138" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(252,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#fa6032" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff7b40" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(259,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#f95b38" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff7447" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(266,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="1" width="6" fill="#f8563f" ry="1" rx="1" y="63" class="bar"></rect>
+                                                    <rect height="1" width="6" ry="1" rx="1" fill="#ff6e50" y="63" class="highlight"></rect>
+                                                </g>
+                                                <g transform="translate(273,0)">
+                                                    <rect height="63" width="7" y="0" class="handle"></rect>
+                                                    <rect height="26" width="6" fill="#f85045" ry="1" rx="1" y="38" class="bar"></rect>
+                                                    <rect height="26" width="6" ry="1" rx="1" fill="#ff6658" y="38" class="highlight"></rect>
+                                                </g>
+                                            </g>
+                                            <path d="M3,10L4.166666666666666,7.999999999999999C5.333333333333333,5.999999999999999,7.666666666666666,1.9999999999999998,10,6.499999999999999C12.333333333333332,10.999999999999998,14.666666666666664,23.999999999999996,17,33.666666666666664C19.333333333333332,43.33333333333333,21.666666666666664,49.66666666666666,24,53.33333333333333C26.333333333333332,56.99999999999999,28.666666666666664,57.99999999999999,30.999999999999996,58.499999999999986C33.33333333333333,58.99999999999999,35.666666666666664,58.99999999999999,38,59.16666666666666C40.33333333333333,59.33333333333333,42.666666666666664,59.666666666666664,45,59.83333333333333C47.33333333333333,60,49.666666666666664,60,52,60C54.33333333333333,60,56.66666666666666,60,58.99999999999999,60.166666666666664C61.33333333333333,60.33333333333333,63.666666666666664,60.666666666666664,66,60.83333333333333C68.33333333333333,61,70.66666666666666,61,73,60.99999999999999C75.33333333333333,61,77.66666666666666,61,80,60.99999999999999C82.33333333333333,61,84.66666666666666,61,87,60.99999999999999C89.33333333333333,61,91.66666666666666,61,93.99999999999999,60.99999999999999C96.33333333333333,61,98.66666666666666,61,101,60.99999999999999C103.33333333333333,61,105.66666666666666,61,108,60.99999999999999C110.33333333333333,61,112.66666666666666,61,114.99999999999999,60.99999999999999C117.33333333333331,61,119.66666666666666,61,122,60.99999999999999C124.33333333333333,61,126.66666666666666,61,129,60.99999999999999C131.33333333333331,61,133.66666666666666,61,136,60.99999999999999C138.33333333333331,61,140.66666666666666,61,143,60.99999999999999C145.33333333333331,61,147.66666666666666,61,150,60.99999999999999C152.33333333333331,61,154.66666666666666,61,157,60.99999999999999C159.33333333333331,61,161.66666666666666,61,164,60.99999999999999C166.33333333333331,61,168.66666666666666,61,171,60.99999999999999C173.33333333333331,61,175.66666666666666,61,178,60.99999999999999C180.33333333333331,61,182.66666666666666,61,185,60.99999999999999C187.33333333333331,61,189.66666666666666,61,192,60.99999999999999C194.33333333333331,61,196.66666666666666,61,199,60.99999999999999C201.33333333333331,61,203.66666666666663,61,205.99999999999997,60.99999999999999C208.33333333333331,61,210.66666666666666,61,212.99999999999997,60.99999999999999C215.33333333333331,61,217.66666666666666,61,220,60.99999999999999C222.33333333333331,61,224.66666666666663,61,226.99999999999997,60.99999999999999C229.33333333333331,61,231.66666666666666,61,233.99999999999997,60.99999999999999C236.33333333333331,61,238.66666666666666,61,241,60.99999999999999C243.33333333333331,61,245.66666666666663,61,247.99999999999997,60.99999999999999C250.33333333333331,61,252.66666666666666,61,254.99999999999997,60.99999999999999C257.3333333333333,61,259.66666666666663,61,262,60.99999999999999C264.3333333333333,61,266.66666666666663,61,269,56.83333333333333C271.3333333333333,52.666666666666664,273.66666666666663,44.33333333333333,274.8333333333333,40.166666666666664L276,36" class="line"></path>
+                                        </g>
+                                    </svg>
+                                </histogram>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 stat-holder xpull-right">
+                            <div class="big-info chart xdouble-chart"><span class="small-title">last blocks miners</span>
+                                <!-- ngRepeat: miner in miners track by miner.miner -->
+                                <div ng-repeat="miner in miners track by miner.miner" data-toggle="tooltip" data-placement="right" data-original-title="13" class="blocks-holder ng-scope">
+                                    <div class="block-count text-warning">13</div>
+                                    <div class="small-title-miner ng-binding">0x2a65aca4d5fc5b5c859090a6c34d164135398226</div>
+                                    <div blocks="13">
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                        <div class="block bg-warning"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!-- end ngRepeat: miner in miners track by miner.miner -->
+                                <div ng-repeat="miner in miners track by miner.miner" data-toggle="tooltip" data-placement="right" data-original-title="11" class="blocks-holder ng-scope">
+                                    <div class="block-count text-info">11</div>
+                                    <div class="small-title-miner ng-binding">0x61c808d82a3ac53231750dadc13c777b59310bd9</div>
+                                    <div blocks="11">
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                        <div class="block bg-info"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!-- end ngRepeat: miner in miners track by miner.miner -->
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row responsive-table">
+      <div class="col-xs-12 stats-boxes"><div class="row second-row"><div class="col-xs-12 stat-holder box"><div class="active-nodes text-warning"><i class="icon-warning-o"></i><span class="small-title">ATTENTION!</span><span class="small-value">This page does not represent the entire state of the ethereum network - listing a node on this page is a voluntary process.</span></div></div>
+</div></div>
+</div>
+<div class="row responsive-table " style="padding-top: 10px"><table class="table table-striped"><thead><tr class="text-info"><th class="th-nodecheck"><i class="icon-check-o" ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)" title="Pin nodes to display first" data-placement="top" data-toggle="tooltip"></i></th><th class="th-nodename"><i class="icon-node" ng-click="orderTable(['info.name'], false)" title="Node name" data-placement="top" data-toggle="tooltip"></i></th><th class="th-nodetype"><i class="icon-laptop" ng-click="orderTable(['info.node'], false)" title="Node type" data-placement="top" data-toggle="tooltip"></i></th><th class="th-latency"><i class="icon-clock" ng-click="orderTable(['stats.latency'], false)" title="Node latency" data-placement="top" data-toggle="tooltip"></i></th><th><i class="icon-mining" ng-click="orderTable(['-stats.hashrate'], false)" title="Is mining" data-placement="top" data-toggle="tooltip"></i></th><th><i class="icon-group" ng-click="orderTable(['-stats.peers'], false)" title="Peers" data-placement="top" data-toggle="tooltip"></i></th><th><i class="icon-network" ng-click="orderTable(['-stats.pending'], false)" title="Pending transactions" data-placement="top" data-toggle="tooltip"></i></th><th><i class="icon-block" ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)" title="Last block" data-placement="top" data-toggle="tooltip"></i></th><th class="th-blockhash">&nbsp;</th><th class="th-blockhash"><i class="icon-difficulty" ng-click="orderTable(['-stats.block.totalDifficulty'], false)" title="Total difficulty" data-placement="top" data-toggle="tooltip"></i></th><th><i class="icon-check-o" ng-click="orderTable(['-stats.block.transactions.length'], false)" title="Block transactions" data-placement="top" data-toggle="tooltip"></i></th><th><i class="icon-uncle" ng-click="orderTable(['-stats.block.uncles.length'], false)" title="Uncles" data-placement="top" data-toggle="tooltip"></i></th><th class="th-blocktime"><i class="icon-time" ng-click="orderTable(['-stats.block.received'], false)" title="Last block time" data-placement="top" data-toggle="tooltip"></i></th><th class="th-peerPropagationTime"><i class="icon-gas" ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)" title="Propagation time" data-placement="top" data-toggle="tooltip"></i></th><th class="th-peerPropagationChart"></th><th class="th-peerPropagationAvg"><i class="icon-gas" ng-click="orderTable(['stats.propagationAvg'], false)" title="Average propagation time" data-placement="top" data-toggle="tooltip"></i></th><th><i class="icon-bulb" ng-click="orderTable(['-stats.uptime'], false)" title="Up-time" data-placement="top" data-toggle="tooltip"></i></th></tr></thead><tbody><!-- ngRepeat: node in nodes | orderBy:predicate track by node.id --><tr class="text-success" id="node_kinξTh" ng-repeat="node in nodes | orderBy:predicate track by node.id"><td class="td-nodecheck"><i class="icon-loader" data-original-title="Click to pin" data-placement="right" data-toggle="tooltip" ng-click="pinNode(node.id)"></i></td><td class="nodeInfo" rel="kinξTh"><span class="small ng-binding" data-original-title="&lt;b&gt;Geth/v1.4.11-stable/linux/go1.5.1&lt;/b&gt;&lt;br&gt;Version: &lt;b&gt;v1.4.11-stable&lt;/b&gt;&lt;br&gt;Network: &lt;b&gt;1&lt;/b&gt;&lt;br&gt;Protocol: &lt;b&gt;63&lt;/b&gt;&lt;br&gt;Port: &lt;b&gt;30303&lt;/b&gt;&lt;br&gt;Web3: &lt;b&gt;0.15.3&lt;/b&gt;&lt;br&gt;API: &lt;b&gt;0.1.1&lt;/b&gt;&lt;br&gt;OS: &lt;b&gt;linux 3.13.0-91-generic&lt;/b&gt;&lt;br&gt;Location: &lt;b&gt;DE&lt;/b&gt;" data-html="true" data-placement="top" data-toggle="tooltip">kinΞTH</span><a class="small hidden" data-original-title="Netstats client needs update.&lt;br&gt;Click this icon for instructions." data-html="true" data-placement="top" data-toggle="tooltip" target="_blank" href="https://github.com/ethereum/wiki/wiki/Network-Status#updating"><i class="icon-warning-o"></i></a></td><td><div class="small ng-binding" ng-bind-html="node.info.node | nodeVersion">Geth/v1.4.11-stable/linux/go1.5.1</div></td><td class="text-success"><span class="small ng-binding">55 ms</span></td><td class="text-gray" ng-bind-html="node.stats.hashrate | hashrateFilter : node.stats.mining"><i class="icon-cancel"></i></td><td class="text-success" style="padding-left: 11px;">125</td><td style="padding-left: 15px;" class="ng-binding">4</td><td class="text-success"><span class="">#2,202,466</span></td><td class="text-success"><span class="small ng-binding">8e301dbd...a01dea8c</span></td><td class="text-success"><span class="small ng-binding">56,612,007,650,218,280,000</span></td><td style="padding-left: 14px;" class="ng-binding">2</td><td style="padding-left: 14px;" class="ng-binding">0</td><td class="text-danger">2 min ago</td><td class="text-info"><div class="propagationBox"></div><span class="ng-binding">0 ms</span></td><td class="peerPropagationChart kinξTh"><span class="ng-binding ng-isolate-scope" data="183,171,157,155,150,220,74,737,739,117,65,148,515,3043,306,184,1079,475,285,356,125,109,238,40,106,400,57,91,63,4278,59,845,0,293,96,83,116,0,2811,0"><canvas style="display: inline-block; width: 119px; height: 20px; vertical-align: top;" width="119" height="20"></canvas></span></td><td class="text-success">474 ms</td><td class="text-success">100%</td></tr><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --><tr class="text-success" id="node_tarkus" ng-repeat="node in nodes | orderBy:predicate track by node.id"><td class="td-nodecheck"><i class="icon-loader" data-original-title="Click to pin" data-placement="right" data-toggle="tooltip" ng-click="pinNode(node.id)"></i></td><td class="nodeInfo" rel="tarkus"><span class="small ng-binding" data-html="true" data-placement="top" data-toggle="tooltip">tarkus</span><a class="small hidden" data-original-title="Netstats client needs update.&lt;br&gt;Click this icon for instructions." data-html="true" data-placement="top" data-toggle="tooltip" target="_blank" href="https://github.com/ethereum/wiki/wiki/Network-Status#updating"><i class="icon-warning-o"></i></a></td><td><div class="small ng-binding" ng-bind-html="node.info.node | nodeVersion"></div></td><td class="text-success"><span class="small ng-binding">51 ms</span></td><td class="text-gray" ng-bind-html="node.stats.hashrate | hashrateFilter : node.stats.mining"><i class="icon-cancel"></i></td><td class="text-success" style="padding-left: 11px;">8</td><td style="padding-left: 15px;" class="ng-binding">0</td><td class="text-danger"><span class="">#0</span></td><td class="text-danger"><span class="small ng-binding">00000000...00000000</span></td><td class="text-danger"><span class="small ng-binding">0</span></td><td style="padding-left: 14px;" class="ng-binding">0</td><td style="padding-left: 14px;" class="ng-binding">0</td><td class="text-danger">∞</td><td class="text-gray"><div class="propagationBox"></div><span class="ng-binding">0 ms</span></td><td class="peerPropagationChart tarkus"><span class="ng-binding ng-isolate-scope" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"><canvas style="display: inline-block; width: 119px; height: 20px; vertical-align: top;" width="119" height="20"></canvas></span></td><td class="text-gray">∞</td><td class="text-success">100%</td></tr><!-- end ngRepeat: node in nodes | orderBy:predicate track by node.id --></tbody></table></div>
+    </div>
+  </div>
+</div>
+<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=37.5651&lon=126.9895542&name=Current Location"> </iframe> 
+-->
+
+
+
+
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <!-- top tiles -->
+  <div class="row tile_count">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+      <div class="count">2500</div>
+      <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
+      <div class="count">123.50</div>
+      <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
+      <div class="count green">2,500</div>
+      <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
+      <div class="count">4,567</div>
+      <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
+      <div class="count">2,315</div>
+      <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
+      <div class="count">7,325</div>
+      <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+    </div>
+  </div>
+  <!-- /top tiles -->
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="dashboard_graph">
+
+        <div class="row x_title">
+          <div class="col-md-6">
+            <h3>Network Activities <small>Graph title sub-title</small></h3>
+          </div>
+          <div class="col-md-6">
+            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+              <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+              <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <div id="placeholder33" style="height: 260px; display: none" class="demo-placeholder"></div>
+          <div style="width: 100%;">
+            <div id="canvas_dahs" class="demo-placeholder" style="width: 100%; height:270px;"></div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+          <div class="x_title">
+            <h2>Top Campaign Performance</h2>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="col-md-12 col-sm-12 col-xs-6">
+            <div>
+              <p>Facebook Campaign</p>
+              <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>Twitter Campaign</p>
+              <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-6">
+            <div>
+              <p>Conventional Media</p>
+              <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>Bill boards</p>
+              <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+  </div>
+  <br />
+
+  <div class="row">
+
+
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320">
+        <div class="x_title">
+          <h2>App Versions</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <h4>App Usage across versions</h4>
+          <div class="widget_summary">
+            <div class="w_left w_25">
+              <span>0.1.5.2</span>
+            </div>
+            <div class="w_center w_55">
+              <div class="progress">
+                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
+                  <span class="sr-only">60% Complete</span>
+                </div>
+              </div>
+            </div>
+            <div class="w_right w_20">
+              <span>123k</span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="widget_summary">
+            <div class="w_left w_25">
+              <span>0.1.5.3</span>
+            </div>
+            <div class="w_center w_55">
+              <div class="progress">
+                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                  <span class="sr-only">60% Complete</span>
+                </div>
+              </div>
+            </div>
+            <div class="w_right w_20">
+              <span>53k</span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="widget_summary">
+            <div class="w_left w_25">
+              <span>0.1.5.4</span>
+            </div>
+            <div class="w_center w_55">
+              <div class="progress">
+                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                  <span class="sr-only">60% Complete</span>
+                </div>
+              </div>
+            </div>
+            <div class="w_right w_20">
+              <span>23k</span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="widget_summary">
+            <div class="w_left w_25">
+              <span>0.1.5.5</span>
+            </div>
+            <div class="w_center w_55">
+              <div class="progress">
+                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                  <span class="sr-only">60% Complete</span>
+                </div>
+              </div>
+            </div>
+            <div class="w_right w_20">
+              <span>3k</span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="widget_summary">
+            <div class="w_left w_25">
+              <span>0.1.5.6</span>
+            </div>
+            <div class="w_center w_55">
+              <div class="progress">
+                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+                  <span class="sr-only">60% Complete</span>
+                </div>
+              </div>
+            </div>
+            <div class="w_right w_20">
+              <span>1k</span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320 overflow_hidden">
+        <div class="x_title">
+          <h2>Device Usage</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <table class="" style="width:100%">
+            <tr>
+              <th style="width:37%;">
+                <p>Top 5</p>
+              </th>
+              <th>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                  <p class="">Device</p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                  <p class="">Progress</p>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <canvas id="canvas1" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+              </td>
+              <td>
+                <table class="tile_info">
+                  <tr>
+                    <td>
+                      <p><i class="fa fa-square blue"></i>IOS </p>
+                    </td>
+                    <td>30%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><i class="fa fa-square green"></i>Android </p>
+                    </td>
+                    <td>10%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><i class="fa fa-square purple"></i>Blackberry </p>
+                    </td>
+                    <td>20%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><i class="fa fa-square aero"></i>Symbian </p>
+                    </td>
+                    <td>15%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><i class="fa fa-square red"></i>Others </p>
+                    </td>
+                    <td>30%</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320">
+        <div class="x_title">
+          <h2>Quick Settings</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="dashboard-widget-content">
+            <ul class="quick-list">
+              <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
+              </li>
+              <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
+              </li>
+              <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+              <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
+              </li>
+              <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+              <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
+              </li>
+              <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
+              </li>
+            </ul>
+
+            <div class="sidebar-widget">
+              <h4>Profile Completion</h4>
+              <canvas width="150" height="80" id="foo" class="" style="width: 160px; height: 100px;"></canvas>
+              <div class="goal-wrapper">
+                <span class="gauge-value pull-left">$</span>
+                <span id="gauge-text" class="gauge-value pull-left">3,200</span>
+                <span id="goal-text" class="goal-value pull-right">$5,000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Recent Activities <small>Sessions</small></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="dashboard-widget-content">
+
+            <ul class="list-unstyled timeline widget">
+              <li>
+                <div class="block">
+                  <div class="block_content">
+                    <h2 class="title">
+                                      <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                  </h2>
+                    <div class="byline">
+                      <span>13 hours ago</span> by <a>Jane Smith</a>
+                    </div>
+                    <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="block">
+                  <div class="block_content">
+                    <h2 class="title">
+                                      <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                  </h2>
+                    <div class="byline">
+                      <span>13 hours ago</span> by <a>Jane Smith</a>
+                    </div>
+                    <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="block">
+                  <div class="block_content">
+                    <h2 class="title">
+                                      <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                  </h2>
+                    <div class="byline">
+                      <span>13 hours ago</span> by <a>Jane Smith</a>
+                    </div>
+                    <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="block">
+                  <div class="block_content">
+                    <h2 class="title">
+                                      <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                  </h2>
+                    <div class="byline">
+                      <span>13 hours ago</span> by <a>Jane Smith</a>
+                    </div>
+                    <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-8 col-sm-8 col-xs-12">
+
+
+
+      <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Visitors location <small>geo-presentation</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="dashboard-widget-content">
+                <div class="col-md-4 hidden-small">
+                  <h2 class="line_30">125.7k Views from 60 countries</h2>
+
+                  <table class="countries_list">
+                    <tbody>
+                      <tr>
+                        <td>United States</td>
+                        <td class="fs15 fw700 text-right">33%</td>
+                      </tr>
+                      <tr>
+                        <td>France</td>
+                        <td class="fs15 fw700 text-right">27%</td>
+                      </tr>
+                      <tr>
+                        <td>Germany</td>
+                        <td class="fs15 fw700 text-right">16%</td>
+                      </tr>
+                      <tr>
+                        <td>Spain</td>
+                        <td class="fs15 fw700 text-right">11%</td>
+                      </tr>
+                      <tr>
+                        <td>Britain</td>
+                        <td class="fs15 fw700 text-right">10%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+
+
+        <!-- Start to do list -->
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>To Do List <small>Sample tasks</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+              <div class="">
+                <ul class="to_do">
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Schedule meeting with new client </p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Create email address for new intern</p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Have IT fix the network printer</p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Copy backups to offsite location</p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Create email address for new intern</p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Have IT fix the network printer</p>
+                  </li>
+                  <li>
+                    <p>
+                      <input type="checkbox" class="flat"> Copy backups to offsite location</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End to do list -->
+        
+        <!-- start of weather widget -->
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Daily active users <small>Sessions</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="temperature"><b>Monday</b>, 07:30 AM
+                    <span>F</span>
+                    <span><b>C</b></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="weather-icon">
+                    <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="weather-text">
+                    <h2>Texas <br><i>Partly Cloudy Day</i></h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="weather-text pull-right">
+                  <h3 class="degrees">23</h3>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="row weather-days">
+                <div class="col-sm-2">
+                  <div class="daily-weather">
+                    <h2 class="day">Mon</h2>
+                    <h3 class="degrees">25</h3>
+                    <canvas id="clear-day" width="32" height="32"></canvas>
+                    <h5>15 <i>km/h</i></h5>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="daily-weather">
+                    <h2 class="day">Tue</h2>
+                    <h3 class="degrees">25</h3>
+                    <canvas height="32" width="32" id="rain"></canvas>
+                    <h5>12 <i>km/h</i></h5>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="daily-weather">
+                    <h2 class="day">Wed</h2>
+                    <h3 class="degrees">27</h3>
+                    <canvas height="32" width="32" id="snow"></canvas>
+                    <h5>14 <i>km/h</i></h5>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="daily-weather">
+                    <h2 class="day">Thu</h2>
+                    <h3 class="degrees">28</h3>
+                    <canvas height="32" width="32" id="sleet"></canvas>
+                    <h5>15 <i>km/h</i></h5>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="daily-weather">
+                    <h2 class="day">Fri</h2>
+                    <h3 class="degrees">28</h3>
+                    <canvas height="32" width="32" id="wind"></canvas>
+                    <h5>11 <i>km/h</i></h5>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="daily-weather">
+                    <h2 class="day">Sat</h2>
+                    <h3 class="degrees">26</h3>
+                    <canvas height="32" width="32" id="cloudy"></canvas>
+                    <h5>10 <i>km/h</i></h5>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- end of weather widget -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+
+
+<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=37.5651&lon=126.9895542&name=Current Location"> </iframe> 

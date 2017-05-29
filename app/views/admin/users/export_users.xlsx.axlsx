@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Customers") do |sh|
+  sh.add_row ["Name", "Phone", "Car", "E-Mail", "Profile", "Kakao", "Status", "Spot", "Issue", "ServiceTime"]
+  @users.each do |user|
+    user_profile = user.user_profile
+    sh.add_row [ user.id, user.phone, user.cars.map{ |c| "#{c.car_name } (#{c.car_number})" }.join("\n") ,\
+ user.email ,user.user_gender_str , user_profile.have_kakao.present?? user_profile.kakao_id : ""  , user.user_status_str, \
+ user.cars.map{ |c| "#{c.spot}" }.join("\n"), user_profile.come_from, user.cars.map{ |c| "#{c.service_period }" }.join("\n")]
+
+  end
+end

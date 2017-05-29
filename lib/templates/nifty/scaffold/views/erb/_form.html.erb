@@ -1,0 +1,15 @@
+<%%= form_for <%= item_path :instance_variable => true %>,  html: { class: "form-horizontal" }  do |f| %>
+  <%% <%= "@#{model_path}" %>.errors.full_messages.each do |msg| %>
+    <li><%%= msg %></li>
+  <%% end %>
+
+  <%- for attribute in model_attributes -%>
+
+    <div class="form-group">
+      <%%= f.label :<%= attribute.name %> %>
+      <%%= f.<%= attribute.field_type %> :<%= attribute.name %>, class: "form-control" %>
+    </div>
+
+  <%- end -%>
+  <%%= f.submit "Send", class: "btn btn-primary" %>
+<%% end %>

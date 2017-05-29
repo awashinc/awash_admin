@@ -1,0 +1,127 @@
+<% if @car.user.present? %>
+
+  <div class="card-container">
+    <p class="line1"><%= @car.owner_name %> / <%= @car.owner_gender %> / <%= @car.owner_status %> </p>
+    <p class="line2"><%= @car.car_manufacturer.try("manufacturer_name") %> <%= @car.car_number %> </p>
+
+    <div class="contact"><%= @car.owner_email %><br/>
+      <%=  @car.owner_phone %><br/>
+      <%= "Kakao : #{@car.owner_kakao}" %>
+    </div>
+    <div class="logo"></div>
+  </div>  
+<% end %>
+
+<%= nested_form_for [:admin, @car],  html: { class: "form-horizontal" }  do |f| %>
+  <% @car.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+
+
+  <% if action_name == "new" %>
+    <div class="form-group row">
+      <%= f.label :owner_name, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= text_field_tag :owner_name, f.object.owner_name, class: "form-control", readonly: action_name == 'edit'%>
+        <%= f.hidden_field :user_id , class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :car_name, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.text_field :car_name, class: "form-control", readonly: action_name == 'edit'%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :car_number, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.text_field :car_number, class: "form-control", readonly: action_name == 'edit'%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :car_manufacturer_id, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.collection_select :car_manufacturer_id, CarManufacturer.all, :id, :manufacturer_name, {prompt: "차종"}, { class: "form-control", readonly: action_name == 'edit'} %> 
+      </div>
+    </div>
+  <% end %>
+
+    <div class="form-group row">
+      <%= f.label :spot, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.text_field :spot, class: "form-control" %>
+        <%= content_tag :span, "Search", class: "btn btn-primary find-location" %>
+      </div>
+    </div>
+
+   <div class="form-group row latlon-lists">
+     <label class="col-sm-2"></label>
+     <div class="col-sm-7">
+     </div>
+   </div>
+
+
+    <div class="form-group row">
+      <%= f.label :latitude, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.text_field :latitude, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :longitude, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.text_field :longitude, class: "form-control" %>
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <%= f.label :service_day, class: "col-sm-2" %>
+      <div class="col-sm-3">
+        <%= f.select :service_day, options_for_select(DayFunc::DAY_LIST.map.with_index{ |day, i| [day, i] }, selected: f.object.service_day), {prompt: "요일" },{class: "form-control"} %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.text_field :service_time, class: "form-control" %>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <%= f.label :service_etc, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.text_field :service_etc, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :issue, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.text_field :issue, class: "form-control" %>
+      </div>
+    </div>
+
+
+    <%= f.fields_for :car_images do |car_img_form| %>
+      <div class="well">
+        <div class="form-group row">
+          <label class="control-label col-sm-2">이미지</label>
+          <div class="controls col-sm-7">
+            <label><%= car_img_form.file_field :image %></label>
+            <%= image_tag car_img_form.object.image.url if car_img_form.object.image.present? %>
+            <%= car_img_form.link_to_remove "삭제", data: {confirm: "정말 삭제 하시겠습니까?"}, :class => "btn btn-danger" %>
+          </div>
+        </div>
+        <%= car_img_form.hidden_field :sort%>
+      </div>
+    <% end %>
+    <p><%= f.link_to_add "정보 추가", :car_images %></p>
+
+
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
+

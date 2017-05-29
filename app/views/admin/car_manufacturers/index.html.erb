@@ -1,0 +1,21 @@
+<table class="table table-hover">
+  <tr>
+    <th>브랜드명</th>
+    <th>관리 차량 개수 </th>
+    <th>Image</th>
+    <th></th>
+  </tr>
+  <% for car_manufacturer in @car_manufacturers %>
+    <tr>
+        <td><%= car_manufacturer.manufacturer_name %></td>
+        <td><%= car_manufacturer.cars.count  %></td>
+        <td><%= image_tag car_manufacturer.car_manufacturer_images.first.image_url, size: "50x50" if  car_manufacturer.car_manufacturer_images.present?   %></td>
+
+      <td>
+          <%= link_to "Edit", edit_admin_car_manufacturer_path(car_manufacturer), class: "btn btn-warning" %>
+          <% link_to "Destroy", [:admin, car_manufacturer], data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+

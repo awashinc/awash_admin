@@ -1,0 +1,157 @@
+
+<% @user.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+<% end %>
+
+
+<%= form_for [:admin, @user], html: { class: "form-horizontal" }  do |f| %>
+
+
+
+  <div class="form-group row">
+    <%= f.label :username, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
+  </div>
+
+  <% if action_name == "new" %>
+    <div class="form-group row">
+      <%= f.label :password, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+    </div>
+
+     <div class="form-group row">
+      <%= f.label :password_confirmation, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="form-group row">
+    <%= f.label :phone, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.text_field :phone, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :email, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :email1, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.text_field :email1, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :wash_offer, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.select :wash_offer, options_for_select(UserFunc::WASHING_LIST.map.with_index{ |day, i| [day, i] }, selected: f.object.wash_offer), {prompt: "세차 종류" },{class: "form-control"} %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :wash_offer_memo, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.text_area :wash_offer_memo, class: "form-control" %>
+    </div>
+  </div>
+
+
+
+  <div class="form-group row">
+    <%= f.label :user_status, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.select :user_status , options_for_select(UserFunc::STATUS_LIST.map.with_index{ |day, i| [day, i] }, selected: f.object.user_status), {prompt: "회원상태" },{class: "form-control"} %>
+    </div>
+  </div>
+
+
+  <% if current_user.user_level >= 90 %>
+    <div class="form-group row">
+      <%= f.label :user_level, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= f.select :user_level, options_for_select(UserFunc::LEVEL_LIST.map { |day, i| [day, i] }, selected: f.object.user_level), {},{class: "form-control"} %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :user_profile do |profile| %>
+
+    <div class="form-group row">
+      <%= profile.label :image, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= profile.file_field :image, class: "form-control" %>
+        <%= image_tag profile.object.image.url if profile.object.image.present? %>
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <%= profile.label :gender, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= profile.select :gender, options_for_select(UserFunc::GENDER_LIST.map.with_index{ |day, i| [day, i] }, selected: profile.object.gender), {},{class: "form-control"} %>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <%= profile.label :birth_date, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= profile.text_field :birth_date, class: "form-control" %>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <%= profile.label :come_from, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= profile.text_field :come_from, class: "form-control" %>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <%= profile.label :is_married, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= profile.select :is_married, options_for_select(UserFunc::MARRIED_LIST.map.with_index{ |day, i| [day, i] }, selected: profile.object.is_married), {},{class: "form-control"} %>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <%= profile.label :kakao_id, class: "col-sm-2" %>
+      <div class="col-sm-7 form-inline ">
+        <%= profile.check_box :have_kakao, class: "form-control " %> 
+        <%= profile.text_field :kakao_id, class: "form-control inline" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= profile.label :memo, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <%= profile.text_area :memo, class: "form-control" %>
+      </div>
+    </div>
+
+
+  <% end %>
+
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
+

@@ -1,0 +1,15 @@
+<table class="table table-hover">
+  <tr>
+      <th>Name</th>
+  </tr>
+  <% for washing in @washings %>
+    <tr>
+        <td><%= washing.car.car_name%></td>
+      
+      <td>
+          <%= link_to "comments", admin_washing_washing_comments_path(washing), class: "btn btn-warning" %>
+          <% link_to "Destroy", [:admin, washing], data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+</table>

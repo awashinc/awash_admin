@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Awash</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'admin/application',"admin/#{controller_name}" , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin/application', "admin/#{controller_name}" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer"%>
+    <!-- NProgress -->
+    <!--
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    -->
+    <!-- iCheck -->
+    <%#= stylesheet_link_tag "iCheck/skins/flat/green" , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- bootstrap-progressbar -->
+    <%#= stylesheet_link_tag "bootstrap-progressbar/bootstrap-progressbar-3.3.4.min" , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- JQVMap -->
+    <%#= stylesheet_link_tag "jqvmap/jqvmap.min" , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- bootstrap-daterangepicker -->
+    <%#= stylesheet_link_tag "bootstrap-daterangepicker/daterangepicker" , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    -->
+
+    <!-- Custom Theme Style -->
+    <%#= stylesheet_link_tag "gentelella/custom.min" , media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <!-- jQuery -->
+    <!--
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    -->
+    <!-- Bootstrap -->
+    <!--
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    -->
+    <!-- FastClick -->
+    <%#= javascript_include_tag "fastclick/fastclick" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- NProgress -->
+    <!--
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    -->
+    <!-- Chart.js -->
+    <%#= javascript_include_tag "Chart.js/Chart.min" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- gauge.js -->
+    <%#= javascript_include_tag "gauge.js/gauge.min" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- bootstrap-progressbar -->
+    <%#= javascript_include_tag "bootstrap-progressbar/bootstrap-progressbar.min" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- iCheck -->
+    <%#= javascript_include_tag "iCheck/icheck.min" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- Skycons -->
+    <%#= javascript_include_tag "skycons/skycons" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- Flot -->
+    <%#= javascript_include_tag "Flot/jquery.flot" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%#= javascript_include_tag "Flot/jquery.flot.pie" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%#= javascript_include_tag "Flot/jquery.flot.time" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%#= javascript_include_tag "Flot/jquery.flot.stack" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%#= javascript_include_tag "Flot/jquery.flot.resize" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- Flot plugins -->
+    <%#= javascript_include_tag "flot.orderbars/jquery.flot.orderBars" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- Flot plugins -->
+    <%#= javascript_include_tag "flot.orderbars/jquery.flot.orderBars" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- Flot plugins -->
+    <%#= javascript_include_tag "flot.orderbars/jquery.flot.orderBars" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%#= javascript_include_tag "flot-spline/jquery.flot.spline.min" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%#= javascript_include_tag "flot.curvedlines/curvedLines" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- DateJS -->
+    <%#= javascript_include_tag "DateJS/date.ko" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- JQVMap -->
+    <%#= javascript_include_tag "jqvmap/jquery.vmap" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%#= javascript_include_tag "jqvmap/maps/jquery.vmap.world" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <%= javascript_include_tag "jqvmap/jquery.vmap.sampledata" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!-- bootstrap-daterangepicker -->
+    <%#= javascript_include_tag "bootstrap-daterangepicker/daterangepicker" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+    <!--
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    -->
+
+    <!-- Custom Theme Scripts -->
+    <%#= javascript_include_tag "gentelella/custom.min" , type: "text/javascript" , 'data-turbolinks-track': 'reload', defer: "defer" %>
+
+
+  </head>
+
+  <body class="nav-md">
+
+    <div class="container body">
+      <div class="main_container">
+        <%= render "layouts/admin_left_bar" %>
+        <% render "layouts/admin_header" %>
+
+        <div class="right_col" role="main">
+          <%= yield %>
+        </div>
+
+        <%= render "layouts/admin_footer" %>
+      </div>
+    </div>
+  </body>
+</html>

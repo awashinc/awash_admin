@@ -1,0 +1,80 @@
+.chat-body{
+  position:absolute;
+  top:44px;
+  bottom:44px;
+  left:0;
+  right:0;
+}
+ul#messages{
+  position:absolute;
+  bottom:0;
+  top:0;
+  left: 0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  margin-bottom:0;
+  padding-left: 0;
+
+  li:nth-child(2n) {
+    background: #fcfcfc none repeat scroll 0 0;
+  }
+  li {
+    background: white none repeat scroll 0 0;
+    border: 0 none;
+    font-size: 12px;
+    padding: 8px 12px;
+    list-style: none;
+    .username{
+      color: #0a9ffa;
+    }
+    .content{
+      padding-left: 10px;
+    }
+  }
+}
+
+#new_message{
+  background: white none repeat scroll 0 0;
+  border-top: 1px solid #eeeeee;
+  bottom: 0;
+  height: 44px;
+  left: 0;
+  position: absolute;
+  right: 0;
+
+  #message_content{
+    background-color: white;
+    border: 0 none;
+    color: #666666;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    line-height: 1.4;
+    outline: medium none;
+    padding: 12px;
+    width: 80%;
+  }
+  .chat_send_btn {
+    background-image: url("https://coinone.co.kr/static/img/chat/chat_reply_icon.png?66ea9bf27a89");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+    float: right;
+    font-weight: 600;
+    max-width: 50px;
+    overflow: hidden;
+    right: 0;
+    width: 20%;
+    background-color: white;
+    border: 0 none;
+    color: #666666;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    height: 44px;
+    margin: 0;
+    outline: medium none;
+    overflow: hidden;
+    padding: 12px;
+  }
+}

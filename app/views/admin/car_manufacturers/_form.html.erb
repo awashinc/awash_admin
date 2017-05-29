@@ -1,0 +1,35 @@
+<%= nested_form_for [:admin, @car_manufacturer],  html: { class: "form-horizontal" }  do |f| %>
+  <% @car_manufacturer.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+
+    <div class="form-group row">
+      <%= f.label :manufacturer_name, class: "col-sm-2" %>
+      <div class="col-sm-7">
+        <% if action_name == "new" %>
+          <%= f.text_field :manufacturer_name, class: "form-control" %>
+        <% else %>
+          <%= f.object.manufacturer_name %>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.fields_for :car_manufacturer_images do |car_img_form| %>
+      <div class="well">
+        <div class="form-group row">
+          <label class="control-label col-sm-2">이미지</label>
+          <div class="controls col-sm-7">
+            <label><%= car_img_form.file_field :image %></label>
+            <%= image_tag car_img_form.object.image.url if car_img_form.object.image.present? %>
+            <%= car_img_form.link_to_remove "삭제", data: {confirm: "정말 삭제 하시겠습니까?"}, :class => "btn btn-danger" %>
+          </div>
+        </div>
+        <%= car_img_form.hidden_field :sort%>
+      </div>
+    <% end %>
+    <p><%= f.link_to_add "정보 추가", :car_manufacturer_images %></p>
+
+
+
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,31 @@
+<table class="table table-hover">
+  <tr>
+    <%- for attribute in model_attributes -%>
+      <th><%= attribute.human_name.titleize %></th>
+    <%- end -%>
+  </tr>
+  <%% for <%= instance_name %> in @<%= instances_name %> %>
+    <tr>
+      <%- for attribute in model_attributes -%>
+        <td><%%= <%= instance_name %>.<%= attribute.name %> %></td>
+      <%- end -%>
+      <% if false %>
+        <%- if action? :show -%>
+          <td><%%= link_to "Show", <%= item_path %> %></td>
+        <%- end -%>
+      <% end %>
+      <td>
+        <%- if action? :edit -%>
+          <%%= link_to "Edit", <%= item_path :action => :edit %>, class: "btn btn-warning" %>
+        <%- end -%>
+        <%- if action? :destroy -%>
+          <%%= link_to "Destroy", <%= item_path %>, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger" %>
+        <%- end -%>
+      </td>
+    </tr>
+  <%% end %>
+</table>
+
+<%- if action? :new -%>
+  <p><%%= link_to "New <%= singular_name.titleize %>", <%= item_path :action => :new %>, class: "btn btn-primary" %></p>
+<%- end -%>

@@ -1,0 +1,86 @@
+<%= form_for [:admin, @washing],  html: { class: "form-horizontal" }  do |f| %>
+  <% @washing.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+
+  <div class="form-group row">
+    <%= f.label :user_id, class: "col-sm-2", value: "Customer Name" %>
+    <div class="col-sm-7">
+      <%= text_field_tag :customer_name, f.object.car.try('owner_name'), class: "form-control" %>
+      <%= f.hidden_field :user_id , class: "form-control" %>
+    </div>
+  </div>
+
+
+
+  <div class="form-group row">
+    <%= f.label :car_id, class: "col-sm-2", value: "Car Name" %>
+    <div class="col-sm-7">
+      <%= text_field_tag :car_number, f.object.car.try('car_number'), class: "form-control" %>
+      <%= f.hidden_field :car_id , class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :user_id, class: "col-sm-2", value: "Washer Name" %>
+    <div class="col-sm-7">
+      <%= text_field_tag :washer_name, f.object.washer_name , class: "form-control" %>
+      <%= f.hidden_field :washer_id , class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :wash_date, class: "col-sm-2", value: "Wahsing Date" %>
+    <div class="col-sm-7">
+      <%= f.text_field :wash_date, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :washer_comment, class: "col-sm-2", value: "Washer's Comment" %>
+    <div class="col-sm-7">
+      <%= f.text_field :washer_comment, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :service_part, class: "col-sm-2", value: "Service Part" %>
+    <div class="col-sm-7">
+      <%= f.text_field :service_part, class: "form-control", placeholder: "외부, 내외부, 내부 " %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :is_inner_clean, class: "col-sm-2", value: " " %>
+    <div class="col-sm-7">
+      <div class="form-check">
+        <label class="form-check-label">
+          <%= f.check_box :is_inner_clean, class: "form-check-input" %> InnerClean
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :start_time, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%= f.text_field :start_time, class: "form-control col-sm-6" %>
+      <%= f.text_field :end_time, class: "form-control col-sm-6" %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :end_time, class: "col-sm-2" %>
+    <div class="col-sm-7">
+      <%#= f.text_field :end_time, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
+

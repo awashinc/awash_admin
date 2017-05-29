@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  car_name: MyString
+  car_number: 
+  car_manufacturer_id: 1
+  spot: MyString
+  issue: MyText
+  service_day: 1
+  service_time: MyString
+
+two:
+  car_name: MyString
+  car_number: 
+  car_manufacturer_id: 1
+  spot: MyString
+  issue: MyText
+  service_day: 1
+  service_time: MyString
